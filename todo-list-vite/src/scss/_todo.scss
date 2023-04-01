@@ -1,4 +1,4 @@
-.app {
+.todo {
     width: 100%;
     height: 100vh;
     padding: 0 1rem;
@@ -22,8 +22,8 @@
 
         .img {
             &__small {
-                width: 15px;
-                height: 15px;
+                width: 1rem;
+                height: 1rem;
             }
             
             &__medium {
@@ -58,8 +58,44 @@
             }
         }
 
+        .search {
+            width: 50%;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            border: 1px solid #d1d1d1;
+            border-radius: 1rem;
+            padding: 0.4rem;
+
+            img {                
+                margin-right: 0.5rem;
+                transition: 0.3s ease-in-out;
+            }
+
+            &:focus-within {
+                border: 1px solid lightblue;
+
+                img {
+                    background-color: lightblue;
+                    padding: 0.2rem;
+                    border-radius: 50%;
+                }
+            }
+
+            &__input {
+                border: none;
+                background: transparent;
+
+                &:focus {
+                    outline: none;
+                    border: none;
+                }
+            }
+        }
+
         .todo__list {
             margin-top: 1rem;
+
             &__empty {
                 display: block;
                 text-align: center;

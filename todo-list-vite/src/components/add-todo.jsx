@@ -10,24 +10,22 @@ const inputs = [
     }
 ];
 
-const AddTodoInput = ({ name, value, placeholder, onChange }) => <input 
+const AddTodoInput = ({ inputRef, name, placeholder }) => <input 
             type="text" 
+            ref={inputRef}
             name={name}
-            value={value}
             placeholder={placeholder}
-            onChange={onChange}
             className="add__todo__input" 
         />;
 
-export default function AddTodo({ isAdd, title, setTitle, addTodo, updateTodo, cancelEdit }) {
+export default function AddTodo({ isAdd, titleInputRef, addTodo, updateTodo, cancelEdit }) {
     return <div className="add__todo">
         {
             inputs.map((input, index) => 
                 <AddTodoInput 
-                    key={index} 
+                    key={index}
+                    inputRef={titleInputRef} 
                     name={input.name}
-                    value={title} 
-                    onChange={setTitle}
                     placeholder={''}
                 />
             )

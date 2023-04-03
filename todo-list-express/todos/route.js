@@ -1,14 +1,14 @@
 const { Router } = require('express');
-const controller = require('./controller');
+const todoController = require('./controller');
 
 const router = Router();
 
-router.post('/', controller.createTodoHandler);
+router.post('/', todoController.createTodoHandler);
 
-router.get('/', controller.getAllTodoHandler);
+router.get('/', todoController.getAllTodoHandler);
 
-router.put('/:id', controller.updateTodoHandler);
+router.put('/:id', todoController.updateTodoHandler);
 
-router.delete('/:id', controller.deleteTodoHandler);
+router.delete('/:id', todoController.deleteTodoHandler);
 
 module.exports = router;

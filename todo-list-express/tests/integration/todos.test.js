@@ -1,7 +1,7 @@
 
 const request = require('supertest');
-const createServer = require('../server');
-const { Todo } = require('../todos/model');
+const createServer = require('../../server');
+const { Todo } = require('../../todos/model');
 
 let server;
 
@@ -14,7 +14,7 @@ describe('/api/todos', () => {
         await Todo.deleteMany({});
     })
 
-    describe('/post', () => {
+    describe('POST /', () => {
          it('should respond with validation error', async () => {
             const data = {
                 'active': true
@@ -33,7 +33,7 @@ describe('/api/todos', () => {
         })
     })
 
-    describe('/get', () => {
+    describe('GET /', () => {
         it('should return with a 200 status', async () => {
             await Todo.collection.insertMany([
                 {title: 'Task1'},
@@ -46,7 +46,7 @@ describe('/api/todos', () => {
         })
     })
 
-    describe('/put/:id', () => {
+    describe('PUT /:id', () => {
         it('should return a 400 status with an invalid id', async () => {
             const response = await request(server).put(`/api/todos/${1}`);
             expect(response.status).toBe(400);
@@ -80,7 +80,7 @@ describe('/api/todos', () => {
         })
     })
 
-    describe('/delete/:id', () => {
+    describe('DELETE /:id', () => {
         it('should return with a 404 if id absent', async () => {
             const response = await request(server).delete(`/api/todos/${1}`);
             expect(response.status).toBe(400);

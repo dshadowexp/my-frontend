@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 const { validateTodo, validateUpdateTodo } = require('./model');
-const service = require('./service');
+const todoService = require('./service');
 
 const createTodoHandler = async (req, res) => {
     const { error } = validateTodo(req.body);
     if (error) 
         return res.status(400).send(error.details[0].message);
 
-    let newTodo = await service.createTodo(req.body);
+    let newTodo = await todoService.createTodo(req.body);
     res.status(201).send(newTodo);
 }
 
 const getAllTodoHandler = async (req, res) => {
-    let todos = await service.getAllTodos();
+    let todos = await todoService.getAllTodos();
     res.status(200).send(todos);
 }
 
@@ -25,11 +25,11 @@ const updateTodoHandler = async (req, res) => {
     if (error) 
         return res.status(400).send(error.details[0].message);
 
-    const existingTodo = await service.getTodoById(id);
+    const existingTodo = await todoService.getTodoById(id);
     if (!existingTodo) 
         return res.status(404).send('Todo does not exist');
 
-    let updatedTodo = await service.updateTodo(id, req.body);
+    let updatedTodo = await todoService.updateTodo(id, req.body);
     res.status(200).send(updatedTodo);
 }
 
@@ -38,11 +38,11 @@ const deleteTodoHandler = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) 
         return res.status(400).send('Invalid request');
 
-    const existingTodo = await service.getTodoById(id);
+    const existingTodo = await todoService.getTodoById(id);
     if (!existingTodo) 
         return res.status(404).send('Todo does not exist');
 
-    await service.deleteTodo(id);
+    await todoService.deleteTodo(id);
     res.status(200).send();
 }
 
